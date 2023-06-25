@@ -16,6 +16,8 @@ const userRouter = require('./starter/routes/userRoutes');
 const reviewRouter = require('./starter/routes/reviewRouter');
 const bookingRouter = require('./starter/routes/bookingRouter');
 const viewRouter = require('./starter/routes/viewRoutes');
+
+// Start express app
 const app = express();
 
 //Path engine
@@ -30,7 +32,6 @@ app.use(express.static(path.join(__dirname, 'starter/public')));
 app.use(helmet());
 
 //Development loggin
-//console.log(process.env.NODE_ENV); // sinple show undefined
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
@@ -73,9 +74,7 @@ app.use(
 
 //Test middleware
 app.use((req, res, next) => {
-  //toISOString it is method for redable string for us
   req.requesTime = new Date().toISOString();
-  // console.log('it is cooke from app.js', req.cookies); //show all cookies in the console
   next();
 });
 
@@ -90,10 +89,6 @@ app.use('/api/v1/bookings', bookingRouter);
 
 //HANDLER FOR UNDEFINED ROUTES
 app.all('*', (req, res, next) => {
-  // const err = new Error("Can't find ${req.originalUrl} on this server!");
-  // err.status = 'fail';
-  // err.StatusCode = 400;
-  // next(err);
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
