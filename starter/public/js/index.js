@@ -32,8 +32,6 @@ if (loginForm) {
 }
 
 if (logOutBtn) {
-  console.log('You in logoutBtn');
-
   logOutBtn.addEventListener('click', logout);
 }
 

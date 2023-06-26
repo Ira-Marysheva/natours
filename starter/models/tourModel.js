@@ -171,37 +171,7 @@ toursSchema.pre(/^find/, function (next) {
   next();
 });
 
-toursSchema.post(/^find/, function (docs, next) {
-  //   console.log(`Query took ${Date.now() - this.start} milliseconds!`);
-  //   console.log(docs);
-  next();
-});
-
-//AGGREGATION MIDDLEWARE
-// toursSchema.pre('aggregate', function (next) {
-//   this.pipeline().unshift({ $match: { $secretTour: { $ne: true } } });
-//   console.log(this.pipeline());
-//   next();
-// });
-
 //creting module
 const Tour = mongoose.model('Tour', toursSchema);
 
 module.exports = Tour;
-
-//it is a pice og code that do emdeding data
-// toursSchema.pre('save', async function (next) {
-//   const guidesPromises = this.guides.map(async (id) => await User.findById(id));
-//   this.guide = await Promise.all(guidesPromises);
-//   next();
-// });
-
-// toursSchema.pre('save', function (next) {
-//   console.log('Will save document...');
-//   next();
-// });
-
-// toursSchema.post('save', function (doc, next) {
-//   console.log(doc);
-//   next();
-// });

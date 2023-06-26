@@ -28,7 +28,7 @@ exports.getCheckOutSessing = catchAsync(async (req, res, next) => {
           product_data: {
             name: `${tour.name} Tour`,
             description: tour.summary,
-            images: [`http://127.0.0.1:3000/img/tours/${tour.imageCover}`],
+            images: [`/img/tours/${tour.imageCover}`],
           },
           unit_amount: tour.price * 100,
           recurring: {

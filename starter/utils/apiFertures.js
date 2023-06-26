@@ -11,15 +11,12 @@ class APIFeatures {
 
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-    // console.log(JSON.parse(queryStr));
-
     this.query.find(JSON.parse(queryStr));
 
     return this;
   }
 
   sort() {
-    console.log('1111', this.queryStr);
     if (this.queryStr.sort) {
       const sortBy = this.queryStr.sort.split(',').join(' ');
       this.query = this.query.sort(sortBy);

@@ -89,20 +89,6 @@ userSchema.methods.correctPassword = async function (
 
 //instance method
 userSchema.methods.changedPasswordAfter = async function (JWTtimestamp) {
-  //JWTtimestamp - is say when the token was issued
-  //false - user NOT cange own password
-  // if (this.passwordChangedAt) {
-  //   console.log('It is text from changedPasswordAfter');
-  //   const changedTimestamp = parseInt(
-  //     this.passwordChangedAt.getTime() / 1000,
-  //     10
-  //   );
-  //   const JWTtimestamp = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
-  //   console.log(JWTtimestamp === changedTimestamp);
-  //   return JWTtimestamp === changedTimestamp; //true means that was changed
-  // }
-  // //False means NOT changed password
-  // return false;
   if (this.passwordChangedAt) {
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
@@ -122,8 +108,6 @@ userSchema.methods.createPasswordResetToken = async function () {
     .createHash('sha256')
     .update(resetToken)
     .digest('hex');
-
-  console.log({ resetToken }, this.passwordResetToken);
 
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
   return resetToken;

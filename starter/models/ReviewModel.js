@@ -96,9 +96,6 @@ reviewSchema.post('save', async function () {
   await this.constructor.calcAverageRatings(this.tour);
 });
 
-//findByIdAndUpdate
-//findByIdAndDelete
-//Це заміна обом методам findOneAnd
 reviewSchema.pre(/^findOneAnd/, async function (next) {
   this.r = await this.clone().findOne();
   //console.log(this.r.tour);
@@ -106,8 +103,6 @@ reviewSchema.pre(/^findOneAnd/, async function (next) {
 });
 
 reviewSchema.post(/^findOneAnd/, async function () {
-  // await this.findOne(); does NOT work here, query has already executed
-  // console.log(this.r);
   await this.model.calcAverageRatings(this.r.tour);
 });
 

@@ -9,8 +9,6 @@ const AppError = require('./../utils/appError');
 const Email = require('./../utils/email');
 const { cli } = require('webpack-dev-server');
 
-//console.log(process.env.NODE_ENV);
-
 const createSentToken = async (user, statusCode, res) => {
   const token = signToken(user._id);
 
@@ -78,17 +76,6 @@ exports.login = catchAsync(async (req, res, next) => {
   createSentToken(user, 200, res);
 });
 
-// let a = new Promise((resolve, reject) => {
-//   // resolve('cveve');
-//   reject('some error');
-// });
-
-// a.then((response) => {
-//   console.log('response', response);
-// }).catch((err) => {
-//   console.log('error', err);
-// });
-
 //Onle for rendered pages, no errors
 exports.isLoggedIn = async (req, res, next) => {
   if (req.cookies.jwt) {
@@ -111,7 +98,6 @@ exports.isLoggedIn = async (req, res, next) => {
       }
       //THERE IS A LOOGED IN USER
       res.locals.user = currentUser;
-      console.log('You is loged in successfully');
 
       return next();
     } catch (err) {
@@ -261,18 +247,9 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
   // 1) Get user from collection DB
-  console.log(req.user._id);
   const user = await User.findById(req.user._id).select('+password');
 
   // 2) Check if POSTed current password is correct
-  console.log(
-    'it is messege from authController',
-    req.body.passwordCurrent,
-    user.password
-  );
-  console.log(
-    await user.correctPassword(req.body.passwordCurrent, user.password)
-  );
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
     return next(new AppError('Your current password is incorrect', 401));
   }
