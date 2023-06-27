@@ -4,7 +4,7 @@
   "description": "learning node, express, mongoDB",
   "main": "app.js",
   "scripts": {
-    "start": "./node_modules/.bin/netlify-lambda serve src",
+    "start": " ./node_modules/.bin/netlify-lambda serve src",
     "build": "./node_modules/.bin/netlify-lambda build src",
     "dev": "nodemon server.js",
     "start:dev": "NODE_ENV=development nodemon server.js",
