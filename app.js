@@ -1,5 +1,5 @@
 const path = require('path');
-const fs = require('fs');
+// const fs = require('fs');
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
@@ -84,14 +84,14 @@ app.use((req, res, next) => {
 //2)ROUTE HANDLERS
 
 //3)ROUTES
-app.use('/', viewRouter);
-app.use('/api/v1/tours', tourRouter);
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/reviews', reviewRouter);
-app.use('/api/v1/bookings', bookingRouter);
+app.use('/.netlify/functions/api/', viewRouter);
+app.use('/.netlify/functions/api/api/v1/tours', tourRouter);
+app.use('/.netlify/functions/api/api/v1/users', userRouter);
+app.use('/.netlify/functions/api/api/v1/reviews', reviewRouter);
+app.use('/.netlify/functions/api/api/v1/bookings', bookingRouter);
 
 //HANDLER FOR UNDEFINED ROUTES
-app.all('*', (req, res, next) => {
+app.all('/.netlify/functions/api/*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
