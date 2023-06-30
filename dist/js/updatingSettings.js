@@ -8,8 +8,8 @@ export const updateSettings = async (data, type) => {
   try {
     const url =
       type === 'password'
-        ? '/api/v1/users/updateMyPassword'
-        : '/api/v1/users/updateMe';
+        ? '/.netlify/functions/api/v1/users/updateMyPassword'
+        : '/.netlify/functions/api/v1/users/updateMe';
 
     const res = await axios({
       method: 'PATCH',

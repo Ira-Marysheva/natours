@@ -1,5 +1,4 @@
 const path = require('path');
-// const fs = require('fs');
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
@@ -9,7 +8,6 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
-
 const AppError = require('./starter/utils/appError');
 const globalErrorHandler = require('./starter/controllers/erroersController');
 const tourRouter = require('./starter/routes/tourRouter');
@@ -17,16 +15,17 @@ const userRouter = require('./starter/routes/userRoutes');
 const reviewRouter = require('./starter/routes/reviewRouter');
 const bookingRouter = require('./starter/routes/bookingRouter');
 const viewRouter = require('./starter/routes/viewRoutes');
+const router = require('./starter/routes/reviewRouter');
 
 // Start express app
-const app = express();
+const app = express()
 
 //Path engine
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'starter/views'));
 
 // Serving static files
-app.use(express.static(path.join(__dirname, 'starter/public')));
+app.use(express.static(path.join(__dirname, './starter/public')));
 
 //1)GLOBAL MIDDLEWARE
 //Set security HTTP handlers
@@ -84,11 +83,11 @@ app.use((req, res, next) => {
 //2)ROUTE HANDLERS
 
 //3)ROUTES
-app.use('/.netlify/functions/api/', viewRouter);
-app.use('/.netlify/functions/api/api/v1/tours', tourRouter);
-app.use('/.netlify/functions/api/api/v1/users', userRouter);
-app.use('/.netlify/functions/api/api/v1/reviews', reviewRouter);
-app.use('/.netlify/functions/api/api/v1/bookings', bookingRouter);
+app.use('/.netlify/functions/api', viewRouter);
+app.use('/.netlify/functions/api/v1/tours', tourRouter);
+app.use('/.netlify/functions/api/v1/users', userRouter);
+app.use('/.netlify/functions/api/v1/reviews', reviewRouter);
+app.use('/.netlify/functions/api/v1/bookings', bookingRouter);
 
 //HANDLER FOR UNDEFINED ROUTES
 app.all('/.netlify/functions/api/*', (req, res, next) => {

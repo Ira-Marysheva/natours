@@ -77,7 +77,7 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 //Onle for rendered pages, no errors
-exports.isLoggedIn = async (req, res, next) => {
+exports.isLoggedIn = async (req, res, next) => {  
   if (req.cookies.jwt) {
     try {
       // 1) Verify token
@@ -120,6 +120,7 @@ exports.logout = (req, res) => {
 exports.protect = catchAsync(async (req, res, next) => {
   // 1) Getting token and check of it's there
   let token;
+  console.log('You in protect middlevare')
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')

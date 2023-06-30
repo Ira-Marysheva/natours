@@ -5,7 +5,7 @@ export const login = async (email, password) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: '/api/v1/users/login',
+      url: '/.netlify/functions/api/v1/users/login',
       data: {
         email,
         password,
@@ -14,7 +14,7 @@ export const login = async (email, password) => {
     if (res.data.status === 'success') {
       showAlert('success', 'Log in successfuly!!!');
       window.setTimeout(() => {
-        location.assign('/'); // Home page
+        location.assign('/.netlify/functions/api/'); // Home page
       }, 1500);
     }
   } catch (err) {
@@ -26,7 +26,7 @@ export const logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
-      url: '/api/v1/users/logout',
+      url: '/.netlify/functions/api/v1/users/logout',
     });
     if (res.data.status === 'success') location.reload(true);
   } catch (err) {
