@@ -5,9 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "netlify dev",
-    "build": "netlify bild",
-    "start:1": " ./node_modules/.bin/netlify-lambda serve src",
-    "build:1": "./node_modules/.bin/netlify-lambda build src",
+    "build": "netlify build",
     "dev": "nodemon server.js",
     "start:dev": "NODE_ENV=development nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
