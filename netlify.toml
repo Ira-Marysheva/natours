@@ -1,4 +1,7 @@
 [build]
   functions = "functions"
   publish = "dist"
-
+[[redirect]]
+  from = "/*"
+  to = ".netlify/functions/api"
+  status = 200
