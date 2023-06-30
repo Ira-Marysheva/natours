@@ -7,17 +7,15 @@ const factory = require('./handlerFactory');
 exports.getCheckOutSessing = catchAsync(async (req, res, next) => {
   //1) Get the currently booked tour
   const tour = await Tour.findById(req.params.tourId);
-  console.log(req.user.id);
-  
   //2)Create chekout session
   const session = await stripe.checkout.sessions.create({
     //information sbout session
-    payment_method_types: ['card'],
-    success_url:  `${req.protocol}://${req.get('host')}/.netlify/functions/api/my-tours/?tour=${
+    payment_method_types: ['card'], 
+    success_url:  `http://${req.get('host')}/.netlify/functions/api/my-tours/?tour=${
       req.params.tourId
     }&user=${req.user.id}&price=${tour.price}`,
 
-    cancel_url:`${req.protocol}://${req.get('host')}/.netlify/functions/api/tour/${tour.slug}`,
+    cancel_url:`http://${req.get('host')}/.netlify/functions/api/tour/${tour.slug}`,
 
     customer_email: req.user.email,
     client_reference_id: req.params.tourId,
@@ -55,7 +53,7 @@ exports.crateBokingCheout = catchAsync(async (req, res, next) => {
   const { tour, user, price } = req.query;
   if (!tour && !user && !price) return next();
   await Booking.create({ tour, user, price });
-  console.gog(`req.originalUrl.split('?')[0])`)
+  console.log(req.originalUrl.split('?')[0])
   res.redirect(req.originalUrl.split('?')[0]);
 });
 

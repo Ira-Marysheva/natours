@@ -62,7 +62,7 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
       $in: tourIDs, // обираються всі тури що мають відповідний ІD
     },
   });
-
+  console.log(bokings, tourIDs, tours)
   res.status(200).render('overview', {
     title: 'My Tours',
     tours,
