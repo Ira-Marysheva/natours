@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "netlify dev",
-    "build": "netlify build",
+    "build": "netlify deploy --prod",
     "dev": "nodemon server.js",
     "start:dev": "NODE_ENV=development nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
